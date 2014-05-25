@@ -16,14 +16,19 @@ before_install:
 #  - composer self-update
 #  - composer install --prefer-source
 
-  - sudo apt-get install nginx
-  - nginx -v
+  # Enable php-fpm
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+  - cat ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+  #- echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
 
-  - ls -al
-  - php -i
-  - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc
-  - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
-  - cat ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default
-  - ls -al /etc/nginx/
+  # Configure Nginx
+  - sudo apt-get install nginx && nginx -v
+  - sudo cp -R Build/Nginx/ /etc/nginx/
+  - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/nginx/sites-enabled/neos
+  - echo "127.0.0.1 neos neos.dev neos.test" | sudo tee -a /etc/hosts
+  - sudo service nginx restart
+
+  - ls -al /etc/nginx
   - ls -al /etc/nginx/sites-enabled
-  - cat /etc/nginx/nginx.conf
+  - cat /etc/nginx/sites-enabled/neos
