@@ -24,7 +24,7 @@ before_install:
 
   # Configure Nginx
   - sudo apt-get install nginx && nginx -v
-  - sudo cp -fR Build/Nginx/* /etc/nginx/.
+  - sudo cp -fR Travis/Nginx/* /etc/nginx/.
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/nginx/sites-enabled/neos.conf
   - cat /etc/nginx/sites-enabled/neos.conf
   - echo "127.0.0.1 neos neos.dev neos.test" | sudo tee -a /etc/hosts && cat /etc/hosts
@@ -33,9 +33,10 @@ before_install:
   # Configure Neos
   - mysql -e 'CREATE DATABASE neos_travis;'
   - mkdir -p Configuration/Testing/Behat Configuration/Development/Behat Configuration/Production/Behat
-  - cp Configuration/Settings.yaml Configuration/Testing/Behat/Settings.yaml Configuration/Development/Behat/Settings.yaml Configuration/Production/Behat/Settings.yaml
-  - cp Travis/Behat.yml Packages/Application/TYPO3.Neos/Tests/Behavior/behat.yml Travis/Behat.yml Packages/Application/TYPO3.TYPO3CR/Tests/Behavior/behat.yml
+  - cp Travis/Configuration/Settings.yaml Configuration/Testing/Behat/Settings.yaml Configuration/Development/Behat/Settings.yaml Configuration/Production/Behat/Settings.yaml
+  - cp Travis/Configuration/Behat.yml Packages/Application/TYPO3.Neos/Tests/Behavior/behat.yml Travis/Behat.yml Packages/Application/TYPO3.TYPO3CR/Tests/Behavior/behat.yml
   - php ./flow behat:setup
+  - FLOW_CONTEXT=Development/Behat ./flow flow:cache:warmup
 
   # Set up selenium
   - "sh -e /etc/init.d/xvfb start"
@@ -48,4 +49,4 @@ after_script:
   - mysql -e 'DROP DATABASE neos_travis;'
 
 script:
-    - phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml
+    - phpunit -c Travis/BuildEssentials/PhpUnit/UnitTests.xml
