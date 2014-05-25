@@ -9,11 +9,13 @@ php:
 #    - php: hhvm
   
 before_install:
-  - composer self-update
-#  - composer create-project --dev --no-interaction --no-progress typo3/neos-base-distribution neos_root 1.1.0-beta2
-#  - git clone git://git.typo3.org/Neos/Distributions/Base.git neos_root
-  - ls -al
+  - git clone git://git.typo3.org/Neos/Distributions/Base.git neos_root
+  - cd neos_root
+  - git checkout 1.1
 
+  - composer self-update
   - composer install --prefer-source
+
   - ls -al
-  - ls -al Build/
+  - php -i
+  - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc
