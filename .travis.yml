@@ -1,13 +1,13 @@
 language: php
 php:
-#  - 5.4
+  - 5.4
   - 5.5
-#  - hhvm
+  - hhvm
 
-#matrix:
-#  allow_failures:
-#    - php: hhvm
-  
+matrix:
+  allow_failures:
+    - php: hhvm
+
 before_install:
   - git clone git://git.typo3.org/Neos/Distributions/Base.git neos_root
   - cd neos_root
@@ -18,16 +18,13 @@ before_install:
 
   # Enable php-fpm
   - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-  - cat ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-  #- echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
 
   # Configure Nginx
   - sudo apt-get install nginx && nginx -v
   - sudo cp -fR ../Travis/Nginx/* /etc/nginx/.
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/nginx/sites-enabled/neos.conf
-  - cat /etc/nginx/sites-enabled/neos.conf
-  - echo "127.0.0.1 neos neos.dev neos.test" | sudo tee -a /etc/hosts && cat /etc/hosts
+  - echo "127.0.0.1 neos neos.dev neos.test" | sudo tee -a /etc/hosts
   - sudo service nginx restart
 
   # Configure Neos
@@ -38,25 +35,14 @@ before_install:
   - cp ../Travis/Configuration/Settings.yaml Configuration/Production/Behat/Settings.yaml
   - cp ../Travis/Configuration/Behat.yml Packages/Application/TYPO3.Neos/Tests/Behavior/behat.yml
   - cp ../Travis/Configuration/Behat.yml Packages/Application/TYPO3.TYPO3CR/Tests/Behavior/behat.yml
-  - mysql --database=neos_travis -e 'show tables;'
   - php ./flow behat:setup
-  - ls -al bin/
-  - ls -al Build
-  - ls -al Build/Behat
-  - mysql --database=neos_travis -e 'show tables;'
   - FLOW_CONTEXT=Development/Behat ./flow flow:cache:warmup
 
   # Setup Selenium server
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
-#  - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
-#  - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
   - "java -jar ./bin/selenium-server.jar > /dev/null &"
-  - sleep 1
-  - sleep 1
-  - sleep 1
-  - sleep 1
-  - sleep 1
+  - sleep 5
 
 after_script:
   - mysql -e 'DROP DATABASE neos_travis;'
@@ -65,5 +51,5 @@ script:
   - phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml
 #  - phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml --coverage-clover=coverage.clover Packages/Application/My.Package/Tests/Unit
   - phpunit -c Build/BuildEssentials/PhpUnit/FunctionalTests.xml
-  - bin/behat -c Packages/Application/TYPO3.Neos/Tests/Behavior/behat.yml -v
-  - bin/behat -c Packages/Application/TYPO3.TYPO3CR/Tests/Behavior/behat.yml -v
+#  - bin/behat -c Packages/Application/TYPO3.Neos/Tests/Behavior/behat.yml -v
+  - bin/behat -c Packages/Application/TYPO3.TYPO3CR/Tests/Behavior/behat.yml
