@@ -51,7 +51,7 @@ before_install:
   - "export DISPLAY=:99.0"
 #  - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
 #  - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
-  - "java -jar ./bin/selenium-server-standalone-2.31.0.jar > /dev/null &"
+  - "java -jar ./bin/selenium-server.jar > /dev/null &"
   - sleep 1
   - sleep 1
   - sleep 1
