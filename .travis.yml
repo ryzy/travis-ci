@@ -27,5 +27,5 @@ before_install:
   - sudo cp -fR Build/Nginx/* /etc/nginx/.
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/nginx/sites-enabled/neos.conf
   - cat /etc/nginx/sites-enabled/neos.conf
-  - echo "127.0.0.1 neos neos.dev neos.test" | sudo tee -a /etc/hosts
+  - echo "127.0.0.1 neos neos.dev neos.test" | sudo tee -a /etc/hosts && cat /etc/hosts
   - sudo service nginx restart
