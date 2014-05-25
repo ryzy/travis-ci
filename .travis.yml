@@ -16,11 +16,13 @@ before_install:
   - composer self-update
   - composer install --prefer-source
 
-  - sudo apt-get install nginx php-fpm
+  - sudo apt-get install nginx
 
   - ls -al
   - php -i
   - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc
   - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
+  - cat ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default
+  - cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - ls -al /etc/nginx/
   - yum install nginx
