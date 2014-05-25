@@ -24,7 +24,7 @@ before_install:
 
   # Configure Nginx
   - sudo apt-get install nginx && nginx -v
-  - sudo cp -fR Build/Nginx /etc/nginx
+  - sudo cp -fR Build/Nginx/* /etc/nginx/.
   - ls -al /etc/nginx
   - ls -al /etc/nginx/sites-enabled
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/nginx/sites-enabled/neos
