@@ -9,13 +9,14 @@ php:
 #    - php: hhvm
   
 before_install:
-  - git clone git://git.typo3.org/Neos/Distributions/Base.git neos_root
-  - cd neos_root
-  - git checkout 1.1
+#  - git clone git://git.typo3.org/Neos/Distributions/Base.git neos_root
+#  - cd neos_root
+#  - git checkout 1.1
 
-  - composer self-update
-  - composer install --prefer-source
+#  - composer self-update
+#  - composer install --prefer-source
 
+  - ls -al /etc/nginx
   - sudo apt-get install nginx
 
   - ls -al
@@ -23,6 +24,5 @@ before_install:
   - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc
   - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
   - cat ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default
-  - cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - ls -al /etc/nginx/
-  - yum install nginx
+  - cat /etc/nginx/nginx.conf
