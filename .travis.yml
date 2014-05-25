@@ -16,9 +16,6 @@ before_install:
 #  - composer self-update
 #  - composer install --prefer-source
 
-  - ls -al /etc/nginx
-  - nginx -v
-
   - sudo apt-get install nginx
   - nginx -v
 
