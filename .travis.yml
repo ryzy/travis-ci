@@ -33,8 +33,11 @@ before_install:
   # Configure Neos
   - mysql -e 'CREATE DATABASE neos_travis;'
   - mkdir -pv Configuration/Testing/Behat Configuration/Development/Behat Configuration/Production/Behat
-  - cp ../Travis/Configuration/Settings.yaml Configuration/Testing/Behat/Settings.yaml Configuration/Development/Behat/Settings.yaml Configuration/Production/Behat/Settings.yaml
-  - cp ../Travis/Configuration/Behat.yml Packages/Application/TYPO3.Neos/Tests/Behavior/behat.yml Travis/Behat.yml Packages/Application/TYPO3.TYPO3CR/Tests/Behavior/behat.yml
+  - cp ../Travis/Configuration/Settings.yaml Configuration/Testing/Behat/Settings.yaml
+  - cp ../Travis/Configuration/Settings.yaml Configuration/Development/Behat/Settings.yaml
+  - cp ../Travis/Configuration/Settings.yaml Configuration/Production/Behat/Settings.yaml
+  - cp ../Travis/Configuration/Behat.yml Packages/Application/TYPO3.Neos/Tests/Behavior/behat.yml
+  - cp ../Travis/Configuration/Behat.yml Packages/Application/TYPO3.TYPO3CR/Tests/Behavior/behat.yml
   - php ./flow behat:setup
   - FLOW_CONTEXT=Development/Behat ./flow flow:cache:warmup
 
