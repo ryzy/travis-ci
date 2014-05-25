@@ -40,6 +40,7 @@ before_install:
   - ./flow flow:cache:warmup
 
   # Setup Selenium server
+  - java -version
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
   - "java -jar ./bin/selenium-server.jar > /dev/null &"
