@@ -38,10 +38,12 @@ before_install:
   - cp ../Travis/Configuration/Settings.yaml Configuration/Production/Behat/Settings.yaml
   - cp ../Travis/Configuration/Behat.yml Packages/Application/TYPO3.Neos/Tests/Behavior/behat.yml
   - cp ../Travis/Configuration/Behat.yml Packages/Application/TYPO3.TYPO3CR/Tests/Behavior/behat.yml
+  - mysql --database=neos_travis -e 'show tables;'
   - php ./flow behat:setup
+  - mysql --database=neos_travis -e 'show tables;'
   - FLOW_CONTEXT=Development/Behat ./flow flow:cache:warmup
 
-  # Set up selenium
+  # Setup Selenium server
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
   - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
@@ -53,3 +55,4 @@ after_script:
 
 script:
   - phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml
+  - phpunit -c Build/BuildEssentials/PhpUnit/FunctionalTests.xml
