@@ -19,3 +19,4 @@ before_install:
   - ls -al
   - php -i
   - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc
+  - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
