@@ -15,3 +15,5 @@ before_install:
   - ls -al
 
   - composer install --prefer-source
+  - ls -al
+  - ls -al Build/
