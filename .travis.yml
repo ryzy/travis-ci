@@ -4,6 +4,7 @@ php:
 
 env:
   - FLOW_CONTEXT=Development/Behat
+  - FLOW_CONTEXT=Production/Behat
 
 rvm:
   - "2.0.0"
