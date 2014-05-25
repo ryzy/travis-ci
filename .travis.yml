@@ -1,13 +1,14 @@
 language: php
 php:
+#  - 5.4
   - 5.5
-  - 5.4
-  - hhvm
-  
-matrix:
-  allow_failures:
-    - php: hhvm
+#  - hhvm
+
+#matrix:
+#  allow_failures:
+#    - php: hhvm
   
 before_install:
   - composer self-update
-  - composer --version
+  - composer create-project --dev --no-interaction --no-progress typo3/neos-base-distribution neos_root 1.1.0-beta2
+  - ls -al
