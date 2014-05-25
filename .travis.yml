@@ -11,8 +11,7 @@ php:
 before_install:
   - composer self-update
 #  - composer create-project --dev --no-interaction --no-progress typo3/neos-base-distribution neos_root 1.1.0-beta2
-  - git clone git://git.typo3.org/Neos/Distributions/Base.git neos_root
+#  - git clone git://git.typo3.org/Neos/Distributions/Base.git neos_root
   - ls -al
 
-  - cd neos_root
   - composer install --prefer-source
