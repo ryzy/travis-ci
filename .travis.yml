@@ -16,7 +16,11 @@ before_install:
   - composer self-update
   - composer install --prefer-source
 
+  - sudo apt-get install nginx php-fpm
+
   - ls -al
   - php -i
   - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc
   - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
+  - ls -al /etc/nginx/
+  - yum install nginx
