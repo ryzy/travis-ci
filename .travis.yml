@@ -17,7 +17,10 @@ before_install:
 #  - composer install --prefer-source
 
   - ls -al /etc/nginx
+  - nginx -v
+
   - sudo apt-get install nginx
+  - nginx -v
 
   - ls -al
   - php -i
@@ -25,4 +28,5 @@ before_install:
   - ls -al ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
   - cat ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default
   - ls -al /etc/nginx/
+  - ls -al /etc/nginx/sites-enabled
   - cat /etc/nginx/nginx.conf
