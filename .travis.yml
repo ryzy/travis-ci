@@ -1,12 +1,12 @@
 language: php
 php:
-  - 5.4
   - 5.5
-  - hhvm
 
-matrix:
-  allow_failures:
-    - php: hhvm
+env:
+  - FLOW_CONTEXT=Development/Behat
+
+rvm:
+  - "2.0.0"
 
 before_install:
   - git clone git://git.typo3.org/Neos/Distributions/Base.git neos_root
@@ -36,7 +36,7 @@ before_install:
   - cp ../Travis/Configuration/Behat.yml Packages/Application/TYPO3.Neos/Tests/Behavior/behat.yml
   - cp ../Travis/Configuration/Behat.yml Packages/Application/TYPO3.TYPO3CR/Tests/Behavior/behat.yml
   - php ./flow behat:setup
-  - FLOW_CONTEXT=Development/Behat ./flow flow:cache:warmup
+  - ./flow flow:cache:warmup
 
   # Setup Selenium server
   - "sh -e /etc/init.d/xvfb start"
