@@ -13,6 +13,7 @@ before_install:
   - git clone git://git.typo3.org/Neos/Distributions/Base.git neos_root
   - cd neos_root
   - git checkout 1.1
+  - git log --pretty=oneline --abbrev-commit -n 10
 
   - composer self-update
   - composer install --prefer-source
