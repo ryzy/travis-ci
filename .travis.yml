@@ -56,3 +56,4 @@ script:
   - phpunit -c Build/BuildEssentials/PhpUnit/FunctionalTests.xml
 #  - bin/behat -c Packages/Application/TYPO3.Neos/Tests/Behavior/behat.yml -v
   - bin/behat -c Packages/Application/TYPO3.TYPO3CR/Tests/Behavior/behat.yml
+  - bin/behat --ansi -c Packages/Framework/TYPO3.Flow/Tests/Behavior/behat.yml.dist
