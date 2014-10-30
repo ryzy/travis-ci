@@ -42,6 +42,7 @@ before_install:
 
   # Setup Selenium server
   - java -version
+  - cat /etc/init.d/xvfb start
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
   - "java -jar ./bin/selenium-server.jar > /dev/null &"
